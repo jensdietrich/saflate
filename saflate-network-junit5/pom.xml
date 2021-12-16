@@ -15,6 +15,27 @@
         <maven.compiler.source>8</maven.compiler.source>
     </properties>
 
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>jensdietrich</id>
+            <name>Jens Dietrich</name>
+            <email>jens.dietrich@wgtn.ac.nz</email>
+        </developer>
+    </developers>
+    
+    <scm>
+        <connection>scm:git:git@github.com:jensdietrich/saflate.git</connection>
+        <developerConnection>scm:git:ssh://github.com:jensdietrich/saflate.git</developerConnection>
+        <url>https://github.com/jensdietrich/saflate/tree/main/saflate-network-junit5</url>
+    </scm>
+
     <build>
         <plugins>
             <plugin>
