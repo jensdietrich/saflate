@@ -3,12 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>nz.ac.wgtn.ecs.saflate</groupId>
+    <groupId>io.github.jensdietrich.saflate</groupId>
     <artifactId>saflate-network-junit5</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <name>saflate-network-junit5</name>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>A JUnit rule that catches network-related exceptions, and flags tests that would otherwise fail as skipped, allowing builds to proceed and therefore reducing flakiness.</description>
+    <url>https://github.com/jensdietrich/saflate</url>
 
     <properties>
         <maven.compiler.target>8</maven.compiler.target>
@@ -26,7 +28,9 @@
         <developer>
             <id>jensdietrich</id>
             <name>Jens Dietrich</name>
-            <email>jens.dietrich@wgtn.ac.nz</email>
+            <email>jens.dietrich@gmail.com</email>
+            <organization>Te Herenga Waka — Victoria University of Wellington</organization>
+            <organizationUrl>https://www.wgtn.ac.nz/</organizationUrl>
         </developer>
     </developers>
     
@@ -65,6 +69,17 @@
                 </executions>
             </plugin>
             <plugin>
+              <groupId>org.sonatype.plugins</groupId>
+              <artifactId>nexus-staging-maven-plugin</artifactId>
+              <version>1.6.8</version>
+              <extensions>true</extensions>
+              <configuration>
+                <serverId>ossrh</serverId>
+                <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
@@ -73,6 +88,57 @@
                         <include>**/TestTest*.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                  <execution>
+                    <id>sign</id>
+                    <goals>
+                      <goal>sign</goal>
+                    </goals>
+                  </execution>
+                  <execution>
+                    <id>verify</id>
+                    <goals>
+                      <goal>verify</goal>
+                    </goals>
+                  </execution>
+                </executions>
+                <configuration>
+                  <keystore>~/.keystore</keystore>
+                  <alias>Alias name</alias>
+                  <storepass>Store password</storepass>
+                  <keypass>Key password</keypass>
+                </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <version>1.5</version>
+              <executions>
+                <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.sonatype.plugins</groupId>
+              <artifactId>nexus-staging-maven-plugin</artifactId>
+              <version>1.6.7</version>
+              <extensions>true</extensions>
+              <configuration>
+                 <serverId>ossrh</serverId>
+                 <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                 <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              </configuration>
             </plugin>
         </plugins>
     </build>
@@ -114,6 +180,14 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+      <snapshotRepository>
+        <id>ossrh</id>
+        <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+      </snapshotRepository>
+    </distributionManagement>
+
 
 
 </project>

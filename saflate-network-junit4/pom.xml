@@ -3,12 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>nz.ac.wgtn.ecs.saflate</groupId>
+    <groupId>io.github.jensdietrich.saflate</groupId>
     <artifactId>saflate-network-junit4</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
-    <name>saflate-network-junit4</name>
+    <description>A JUnit rule that catches network-related exceptions, and flags tests that would otherwise fail as skipped, allowing builds to proceed and therefore reducing flakiness.</description>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <url>https://github.com/jensdietrich/saflate</url>
 
     <properties>
         <maven.compiler.target>8</maven.compiler.target>
@@ -26,7 +28,9 @@
         <developer>
             <id>jensdietrich</id>
             <name>Jens Dietrich</name>
-            <email>jens.dietrich@wgtn.ac.nz</email>
+            <email>jens.dietrich@gmail.com</email>
+            <organization>Te Herenga Waka — Victoria University of Wellington</organization>
+            <organizationUrl>https://www.wgtn.ac.nz/</organizationUrl>
         </developer>
     </developers>
 
@@ -73,6 +77,31 @@
                         <include>**/TestTest*.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <version>1.5</version>
+              <executions>
+                <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.sonatype.plugins</groupId>
+              <artifactId>nexus-staging-maven-plugin</artifactId>
+              <version>1.6.7</version>
+              <extensions>true</extensions>
+              <configuration>
+                 <serverId>ossrh</serverId>
+                 <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                 <autoReleaseAfterClose>true</autoReleaseAfterClose>
+              </configuration>
             </plugin>
         </plugins>
     </build>
