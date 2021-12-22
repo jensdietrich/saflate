@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>A JUnit rule that catches network-related exceptions, and flags tests that would otherwise fail as skipped, allowing builds to proceed and therefore reducing flakiness.</description>
+    <description>A JUnit extension that catches network-related exceptions thrown while testing, and flags tests that would otherwise fail because of this as skipped, allowing builds to proceed and therefore reducing flakiness.</description>
     <url>https://github.com/jensdietrich/saflate</url>
 
     <properties>
