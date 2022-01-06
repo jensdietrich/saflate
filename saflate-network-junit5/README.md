@@ -73,6 +73,15 @@ The list of extensions to be sanitised can be extended by implementing and provi
 
 `nz.ac.wgtn.saflate.network.junit5.NetworkExceptionProvider`. 
 
+## Change log
+
+### Version 1.0.0 
+
+initial release
+
+### Version 1.1.0
+
+- fixed JUnit dependency issue causing builds to fail with junit 5.8 
 
 ## Related Work
 

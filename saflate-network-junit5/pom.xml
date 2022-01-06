@@ -5,7 +5,7 @@
 
     <groupId>io.github.jensdietrich.saflate</groupId>
     <artifactId>saflate-network-junit5</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <name>${project.groupId}:${project.artifactId}</name>
@@ -85,34 +85,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>**/TestTest*.java</include>
+                        <include>**/TestTests*.java</include>
                     </includes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jarsigner-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                  <execution>
-                    <id>sign</id>
-                    <goals>
-                      <goal>sign</goal>
-                    </goals>
-                  </execution>
-                  <execution>
-                    <id>verify</id>
-                    <goals>
-                      <goal>verify</goal>
-                    </goals>
-                  </execution>
-                </executions>
-                <configuration>
-                  <keystore>~/.keystore</keystore>
-                  <alias>Alias name</alias>
-                  <storepass>Store password</storepass>
-                  <keypass>Key password</keypass>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,20 +120,14 @@
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>[5.6.0,5.7.0)</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>[5.6.0,5.7.0)</version>
+            <artifactId>junit-jupiter</artifactId>
+            <version>[5.6.0,6.0.0)</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-commons -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-commons</artifactId>
-            <version>1.7.2</version>
+            <version>[1.8.0,2.0.0)</version>
             <scope>test</scope>
         </dependency>
 
@@ -187,7 +155,5 @@
         <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
       </snapshotRepository>
     </distributionManagement>
-
-
 
 </project>
