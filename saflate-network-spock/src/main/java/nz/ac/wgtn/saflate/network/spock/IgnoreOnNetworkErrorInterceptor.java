@@ -1,6 +1,7 @@
 package nz.ac.wgtn.saflate.network.spock;
 
 import org.junit.AssumptionViolatedException;
+import org.opentest4j.TestAbortedException;
 import org.spockframework.runtime.extension.AbstractMethodInterceptor;
 import org.spockframework.runtime.extension.IMethodInvocation;
 import java.net.NoRouteToHostException;
@@ -42,11 +43,8 @@ public class IgnoreOnNetworkErrorInterceptor extends AbstractMethodInterceptor {
     private void doIntercept(IMethodInvocation invocation) throws Throwable {
         try {
             invocation.proceed();
-        } catch (AssertionError e) {
-            // TODO check for network error
-            throw markAsSkip(e.getStackTrace());
         } catch (Throwable e) {
-            if (isDeepNetworkException(e)) {
+            if (!(e instanceof TestAbortedException) && !(e instanceof AssumptionViolatedException) && isDeepNetworkException(e)) {
                 throw markAsSkip(e.getStackTrace());
             } else {
                 throw e;
